@@ -1,3 +1,5 @@
+.load ./libsqlitemd5.so
+
 create table t1(x);
 insert into t1 values (1);
 insert into t1 values (2);
