@@ -1,2 +1,6 @@
 # sqlite-md5
-MD5 message-digest algorithm library for SQLite
+The MD5 SQLite extension library provides the following MD5 message-digest
+algorithm functions (loaded with `.load libsqlitemd5.so`):
+- GROUP_MD5
+- MD5
+- MD5FILE
