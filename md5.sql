@@ -8,4 +8,4 @@ drop table t1;
 
 select 'ERROR' where hex(md5(''))!='D41D8CD98F00B204E9800998ECF8427E';
 
---select 'ERROR' where hex(md5file('md5.c'))!='db2baba02b6d3d3b61ac04ab71cd5ca3';
+select 'ERROR' where hex(md5file('md5.c'))!='aca7c0e51f6dcda1419414105cded019' collate nocase;
