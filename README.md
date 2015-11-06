@@ -22,3 +22,11 @@ select hex(md5(''));
 
 select hex(md5file('/tmp/somefile'));
 ~~~
+
+## License
+
+This code in Public Domain
+
+## Acknowledgements
+
+The code is based heavily on the [now deprecated](http://sqlite.mobigroup.ru/info/4bc6cd8ee0d78355) [MBG SQLite's](http://sqlite.mobigroup.ru) [md5](http://sqlite.mobigroup.ru/dir?name=ext/md5) extension by Alexey Pechnikov <pechnikov@mobigroup.ru>.
