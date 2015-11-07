@@ -6,6 +6,13 @@ algorithm functions (loaded with `.load libsqlitemd5.so`):
 - MD5
 - MD5FILE
 
+## Installation
+~~~
+% make
+% make test
+# make install
+~~~
+FreeBSD users can install sqlite-md5 from [port](https://github.com/moisseev/unofficial-freebsd-ports/tree/master/databases/sqlite-md5) (unofficial).
 
 ## Usage example
 
