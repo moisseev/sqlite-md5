@@ -385,6 +385,10 @@ int sqlite3Md5Init(sqlite3 *db){
   return 0;
 }
 
+#ifdef _WIN32
+__declspec(dllexport)
+#endif
+
 #if !SQLITE_CORE
 int sqlite3_extension_init(
   sqlite3 *db, 
