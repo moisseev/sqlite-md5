@@ -339,6 +339,27 @@ static void md5(sqlite3_context *context, int argc, sqlite3_value **argv){
   sqlite3_result_blob(context, digest, sizeof(digest), SQLITE_TRANSIENT);
 }
 
+static void md5_16(sqlite3_context *context, int argc, sqlite3_value **argv) {
+  MD5Context ctx;
+  unsigned char digest[16];
+  int i;
+
+  if (argc<1) return;
+  if (sqlite3_value_type(argv[0]) == SQLITE_NULL) {
+    sqlite3_result_null(context);
+    return;
+  }
+  MD5Init(&ctx);
+  for (i = 0; i<argc; i++) {
+    const char *zData = (char*)sqlite3_value_text16(argv[i]);
+    if (zData) {
+      MD5Update(&ctx, (unsigned char*)zData, sqlite3_value_bytes16(argv[i]));
+    }
+  }
+  MD5Final(digest, &ctx);
+  sqlite3_result_blob(context, digest, sizeof(digest), SQLITE_TRANSIENT);
+}
+
 /*
 ** A command to take the md5 hash of a file.  The argument is the
 ** name of the file.
@@ -381,9 +402,14 @@ static void md5file(sqlite3_context *context, int argc, sqlite3_value **argv){
 int sqlite3Md5Init(sqlite3 *db){
   sqlite3_create_function(db, "group_md5", -1, SQLITE_UTF8, 0, 0, md5step, md5finalize);
   sqlite3_create_function(db, "md5",      -1, SQLITE_UTF8,  0, md5,     0, 0);
+  sqlite3_create_function(db, "md5_16",      -1, SQLITE_UTF16,  0, md5_16,     0, 0);
   sqlite3_create_function(db, "md5file",   1, SQLITE_UTF8,  0, md5file, 0, 0);
   return 0;
 }
+
+#ifdef _WIN32
+__declspec(dllexport)
+#endif
 
 #if !SQLITE_CORE
 int sqlite3_extension_init(
