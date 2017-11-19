@@ -4,6 +4,7 @@ The MD5 SQLite extension library provides the following MD5 message-digest
 algorithm functions (loaded with `.load libsqlitemd5.so`):
 - GROUP_MD5
 - MD5
+- MD5_UTF16 - returns the md5 hash of an UTF-16 representation of a string
 - MD5FILE
 
 ## Installation
@@ -26,6 +27,8 @@ insert into t1 values (3);
 select hex(group_md5(x)) from t1;
 
 select hex(md5(''));
+
+select hex(md5_utf16('a'));
 
 select hex(md5file('/tmp/somefile'));
 ~~~
