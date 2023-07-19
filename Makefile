@@ -3,10 +3,12 @@ PREFIX ?= /usr/local
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
-  PREFIX := $(shell brew --prefix)/opt/sqlite
+	CFLAGS += -I$(shell brew --prefix)/opt/sqlite
+else
+	CFLAGS += -I${PREFIX}/include
 endif
 
-CFLAGS += -I${PREFIX}/include -fPIC -lm -shared
+CFLAGS += -fPIC -lm -shared
 
 .PHONY: all clean install test uninstall
 
